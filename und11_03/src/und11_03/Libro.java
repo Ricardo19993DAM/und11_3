@@ -34,9 +34,9 @@ public class Libro {
 	public void setDatos() {
 		System.out.println("Introduce titulo: ");
 		titulo=Util.introducirCadena();
-		System.out.println("Introduce genero");
+		System.out.println("Introduce genero: ");
 		genero=Util.introducirCadena();
-		fechaPubli=Util.leerFecha("Introduce fecha de publicacion -->(dd/mm/aaaa)");
+		fechaPubli=Util.leerFecha("Introduce fecha de publicacion -->(dd/mm/aaaa): ");
 		System.out.println("Introduce ISBN: ");
 		isbn=Util.introducirCadena();
 	}

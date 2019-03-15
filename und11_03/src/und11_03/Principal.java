@@ -44,12 +44,11 @@ public class Principal {
 
 	private static int menu() {
 		System.out.println("=======================M E N U===================");
-		System.out.println("1) Introducir un libro. Se pregunta por el nombre y el apellido del escritor y si existe, se añade un libro. Si el\r\n" + 
-				"escritor no existe, se piden sus datos, a continuación los del libro y se guarda.\r\n" + 
+		System.out.println("1) Introducir un libro\r\n"+
 				"2) Borrar un libro por su isbn.\r\n" + 
 				"3) Listar el primer y el último de los libros publicados a partir del nombre y el apellido del escritor.\r\n" + 
 				"4) Borrar el escritor y todos sus libros a partir del nombre y apellido del escritor.\r\n" + 
-				"5) Ordenar los escritores por fecha de nacimiento (ordenar el arraylist).\r\n" + 
+				"5) Ordenar los escritores por fecha de nacimiento.\r\n" + 
 				"6) Listar los escritores ordenados por el número de libros publicados.\r\n" + 
 				"7) Mostrar el número de libros de un genero determinado, de cualquier escritor.\r\n" + 
 				"8) Mostrar los libros que contienen una determinada palabra en su título.\r\n" + 
@@ -58,8 +57,6 @@ public class Principal {
 	}
 
 	private static void alta(ArrayList<Escritor> escritores) {
-		Libro auxLibro=new Libro();
-		auxLibro.setDatos();
 		String auxNombre=Util.introducirCadena("Introduce nombre de escritor: ");
 		String auxApe=Util.introducirCadena("Introduce nombre de apellido");
 		boolean existe=false;
@@ -71,12 +68,17 @@ public class Principal {
 				break;
 			}
 		}
+
 		if(existe) {
+			Libro auxLibro=new Libro();
+			auxLibro.setDatos();
 			escritores.get(posi).addLibro(auxLibro);
 			System.out.println("Libro añadido");
 		}else {
 			Escritor aux=new Escritor();
 			aux.setDatos(auxNombre, auxApe);
+			Libro auxLibro=new Libro();
+			auxLibro.setDatos();
 			aux.addLibro(auxLibro);
 			escritores.add(aux);
 			System.out.println("Escritor añadido");
@@ -169,6 +171,7 @@ public class Principal {
 	}
 
 	private static void numero(ArrayList<Escritor> escritores) {
+		/*
 		String auxNombre=Util.introducirCadena("Introduce nombre de escritor: ");
 		String auxApe=Util.introducirCadena("Introduce nombre de apellido: ");
 		String auxGenero=Util.introducirCadena("Introduce genero: ");
@@ -178,11 +181,20 @@ public class Principal {
 				break;
 			}
 		}
-
+		 */
+		int cont=0;
+		String auxGenero=Util.introducirCadena("Introduce genero: ");
+		for(Escritor e:escritores) {
+			cont=cont+e.getNumeroLibrosPorGenero(auxGenero);
+		}
+		System.out.println("Numero de libro del genero: "+cont);
 	}
 
 	private static void mostrar(ArrayList<Escritor> escritores) {
+
+
 		String auxTitulo=Util.introducirCadena("Introduce palabra o fragmento del titulo");
+		auxTitulo=auxTitulo.toLowerCase();
 		for(Escritor e:escritores) {
 			Iterator <Libro>i=e.getLibros().values().iterator();
 			while(i.hasNext()) {
